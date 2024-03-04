@@ -1,22 +1,36 @@
 <template>
   <div>
-    <div id="page-wrap" v-if="product">
-      <h4 v-if="notif" class="notif">item added successfully</h4>
+    <div id="page-wrap">
       <div id="img-wrap">
-        <img :src="`http://localhost:8000${product.imageUrl}`" alt="" />
+        <img :src="product.imageUrl" alt="" />
       </div>
       <div id="product-details">
         <h1>{{ product.name }}</h1>
         <h3 id="price">Rp{{ product.price }}</h3>
         <p>Average rating: {{ product.averageRating }}</p>
-        <button id="add-to-cart" @click="addToCart()">Add to Cart</button>
+        <button id="add-to-cart">Add to Cart</button>
         <p>{{ product.description }}</p>
       </div>
     </div>
-
-    <NotFound v-else />
   </div>
 </template>
+
+<script>
+import product from '../../data-seed.js'
+
+export default {
+  data() {
+    return {
+      product: product
+    }
+  },
+  created() {
+    const id = this.$route.params.id
+    this.product = product.find((product) => product.id === id)
+  }
+}
+</script>
+
 <style scoped>
 #page-wrap {
   margin-top: 16px;
