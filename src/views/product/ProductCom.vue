@@ -1,19 +1,17 @@
 <template>
   <div id="page-wrap">
     <div class="grid-wrap">
-      <!-- <ProductItems v-for="product in products" :key="product.id" :product="product" /> -->
       <CardProduct v-for="product in products" :key="product.id" :product="product" />
     </div>
   </div>
 </template>
 <script>
 import product from '../../data-seed.js'
-// import ProductItems from '@/components/ProductItems.vue'
+
 import CardProduct from '@/components/CardProduct.vue'
 export default {
   components: {
     CardProduct
-    // ProductItems
   },
   data() {
     return {
