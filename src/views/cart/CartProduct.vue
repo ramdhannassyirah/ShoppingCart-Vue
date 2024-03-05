@@ -1,4 +1,7 @@
 <template>
+  <div id="total-price">
+    <h1>$ 99999</h1>
+  </div>
   <div class="product-container" v-for="product in products" :key="product.id">
     <div>
       <img class="product-image" :src="product.imageUrl" alt="" />
@@ -8,10 +11,6 @@
     <router-link class="remove-button" to="">
       <button>Remove</button>
     </router-link>
-  </div>
-
-  <div id="total-price">
-    <h1>$ 99999</h1>
   </div>
 </template>
 
