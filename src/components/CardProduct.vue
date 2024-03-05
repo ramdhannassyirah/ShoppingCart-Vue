@@ -24,6 +24,7 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
 .card {
   --font-color: #323232;
   --font-color-sub: #666;
@@ -42,6 +43,7 @@ export default {
   padding: 20px;
   gap: 10px;
   font-family:
+    'Madimi One',
     system-ui,
     -apple-system,
     BlinkMacSystemFont,

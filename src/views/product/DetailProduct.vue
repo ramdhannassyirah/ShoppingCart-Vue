@@ -8,7 +8,7 @@
         <h1>{{ product.name }}</h1>
         <p>Average rating: {{ product.averageRating }}</p>
         <p>{{ product.description }}</p>
-        <p>${{ product.price }}</p>
+        <p class="price">${{ product.price }}</p>
         <button class="button-56" role="button">Add to Cart</button>
       </div>
     </div>
@@ -32,21 +32,42 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
+
 #page-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 20px;
+  gap: 20px;
 }
 
 #product-details {
   display: flex;
   flex-direction: column;
+  font-family: 'Madimi One', sans-serif;
   gap: 20px;
 }
 
+.price {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.card-img {
+  transition: all 0.5s;
+  display: flex;
+  justify-content: center;
+}
+
+.card-img:hover {
+  transform: translateY(-3px);
+}
+
 img {
+  height: 400px;
   width: 400px;
+  border-radius: 5%;
 }
 
 .button-56 {
@@ -58,7 +79,7 @@ img {
   color: #111;
   cursor: pointer;
   display: flex;
-  font-family: Inter, sans-serif;
+  font-family: 'Madimi One', Inter, sans-serif;
   font-size: 16px;
   height: 48px;
   justify-content: center;

@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <div class="">
-      <h1>Logo</h1>
+      <h1>Shopping Cart</h1>
     </div>
     <div class="">
       <router-link class="card-btn" to="">
@@ -16,10 +16,13 @@ export default {}
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family: 'Madimi One';
+  padding: 20px;
 }
 
 button {
