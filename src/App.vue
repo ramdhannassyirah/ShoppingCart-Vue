@@ -9,7 +9,7 @@ export default {
 
 <template>
   <NavbarShop />
-  <router-link :to="{ name: 'product' }">Product</router-link>
+
   <RouterView />
 </template>
 

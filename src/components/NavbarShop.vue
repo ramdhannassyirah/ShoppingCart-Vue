@@ -3,8 +3,11 @@
     <div class="">
       <h1>Shopping Cart</h1>
     </div>
-    <div class="">
-      <router-link class="card-btn" to="">
+    <div class="list">
+      <router-link class="card-btn" :to="{ name: 'product' }">
+        <button>Product</button>
+      </router-link>
+      <router-link class="card-btn" :to="{ name: 'cart' }">
         <button>Cart</button>
       </router-link>
     </div>
@@ -23,6 +26,12 @@ export default {}
   align-items: center;
   font-family: 'Madimi One';
   padding: 20px;
+  gap: 10px;
+}
+
+.list {
+  display: flex;
+  gap: 10px;
 }
 
 button {
