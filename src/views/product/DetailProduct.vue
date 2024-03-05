@@ -101,7 +101,7 @@ img {
   outline: 0;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .button-56 {
     padding: 0 40px;
   }

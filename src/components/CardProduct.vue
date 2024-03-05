@@ -60,7 +60,6 @@ export default {
 }
 
 .card-img {
-  /* clear and add new css */
   transition: all 0.5s;
   display: flex;
   justify-content: center;

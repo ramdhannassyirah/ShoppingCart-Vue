@@ -1,12 +1,16 @@
-<script >
+<script>
+import NavbarShop from './components/NavbarShop.vue'
+export default {
+  components: {
+    NavbarShop
+  }
+}
 </script>
 
 <template>
-  <router-link :to=" {name: 'product'}" >Product</router-link>
-  
+  <NavbarShop />
+  <router-link :to="{ name: 'product' }">Product</router-link>
   <RouterView />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
