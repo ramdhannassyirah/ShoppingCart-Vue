@@ -10,7 +10,7 @@
 
     <div class="card-price"><span>$</span> {{ product.price }}</div>
     <router-link class="remove-button" to="">
-      <button>Remove</button>
+      <button @click="removeProduct(product.id)">Remove</button>
     </router-link>
   </div>
 </template>
@@ -21,6 +21,11 @@ export default {
   data() {
     return {
       products: product
+    }
+  },
+  methods: {
+    removeProduct(id) {
+      this.products = this.products.filter((product) => product.id !== id)
     }
   }
 }

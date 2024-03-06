@@ -9,7 +9,7 @@
         <p>Average rating: {{ product.averageRating }}</p>
         <p>{{ product.description }}</p>
         <p class="price">${{ product.price }}</p>
-        <button class="button-56" role="button">Add to Cart</button>
+        <button class="button-56" role="button" @click="addToCart">Add to Cart</button>
       </div>
     </div>
   </div>
@@ -27,6 +27,11 @@ export default {
   created() {
     const id = this.$route.params.id
     this.product = product.find((product) => product.id === id)
+  },
+  methods: {
+    addToCart() {
+      this.$router.push({ name: 'cart' })
+    }
   }
 }
 </script>

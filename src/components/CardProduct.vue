@@ -10,16 +10,25 @@
     <hr class="card-divider" />
     <div class="card-footer">
       <div class="card-price"><span>$</span> {{ product.price }}</div>
-      <router-link class="card-btn" :to="{ name: 'detail', params: { id: product.id } }">
-        <button>Detail</button>
-      </router-link>
+      <div class="card-foot">
+        <button class="button-56" role="button" @click="addToCart">Buy</button>
+        <router-link class="card-btn" :to="{ name: 'detail', params: { id: product.id } }">
+          <button>Detail</button>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['product']
+  props: ['product'],
+
+  methods: {
+    addToCart() {
+      this.$router.push({ name: 'cart' })
+    }
+  }
 }
 </script>
 
@@ -59,6 +68,13 @@ export default {
 
 .card:last-child {
   justify-content: flex-end;
+}
+
+.card-foot {
+  display: flex;
+  gap: 5px;
+  text-decoration: none;
+  color: #323232;
 }
 
 .card-img {
