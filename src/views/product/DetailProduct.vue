@@ -2,7 +2,7 @@
   <div>
     <div id="page-wrap">
       <div id="img-wrap">
-        <img :src="product.imageUrl" alt="" />
+        <img :src="`https://shoppingcart-vue-server.up.railway.app${product.imageUrl}`" alt="" />
       </div>
       <div id="product-details">
         <h1>{{ product.name }}</h1>
@@ -16,17 +16,20 @@
 </template>
 
 <script>
-import product from '../../data-seed.js'
-
+// import product from '../../data-seed.js'
+import axios from 'axios'
 export default {
   data() {
     return {
-      product: product
+      product: {}
     }
   },
-  created() {
-    const id = this.$route.params.id
-    this.product = product.find((product) => product.id === id)
+  async created() {
+    const code = this.$route.params.id
+    const result = await axios.get(
+      `https://shoppingcart-vue-server.up.railway.app/api/products/${code}`
+    )
+    this.product = result.data
   },
   methods: {
     addToCart() {

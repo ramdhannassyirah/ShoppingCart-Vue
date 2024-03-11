@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-img">
       <div class="img">
-        <img :src="product.imageUrl" alt="" />
+        <img :src="`https://shoppingcart-vue-server.up.railway.app${product.imageUrl}`" alt="" />
       </div>
     </div>
     <div class="card-title">{{ product.name }}</div>
@@ -12,7 +12,7 @@
       <div class="card-price"><span>$</span> {{ product.price }}</div>
       <div class="card-foot">
         <button class="button-56" role="button" @click="addToCart">Buy</button>
-        <router-link class="card-btn" :to="{ name: 'detail', params: { id: product.id } }">
+        <router-link class="card-btn" :to="{ name: 'detail', params: { id: product.code } }">
           <button>Detail</button>
         </router-link>
       </div>
