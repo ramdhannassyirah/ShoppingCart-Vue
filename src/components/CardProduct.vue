@@ -11,7 +11,7 @@
     <div class="card-footer">
       <div class="card-price"><span>$</span> {{ product.price }}</div>
       <div class="card-foot">
-        <button class="button-56" role="button" @click="addToCart">Buy</button>
+        <button class="button-56" role="button" @click="addToCart">Add to Cart</button>
         <router-link class="card-btn" :to="{ name: 'detail', params: { id: product.code } }">
           <button>Detail</button>
         </router-link>
@@ -21,12 +21,35 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   props: ['product'],
 
   methods: {
     addToCart() {
-      this.$router.push({ name: 'cart' })
+      const requestData = {
+        product: this.product.code
+      }
+
+      axios
+        .post(
+          'https://shoppingcart-vue-server.up.railway.app/api/orders/update/user/1',
+          requestData,
+          {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+        .then(() => {
+          console.log('Product added to cart successfully')
+
+          this.$router.push({ name: 'cart' })
+        })
+        .catch((error) => {
+          console.error('Error adding product to cart:', error.message)
+        })
     }
   }
 }

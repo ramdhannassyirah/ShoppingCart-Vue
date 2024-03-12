@@ -33,7 +33,28 @@ export default {
   },
   methods: {
     addToCart() {
-      this.$router.push({ name: 'cart' })
+      const requestData = {
+        product: this.product.code
+      }
+
+      axios
+        .post(
+          'https://shoppingcart-vue-server.up.railway.app/api/orders/update/user/1',
+          requestData,
+          {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+        .then(() => {
+          console.log('Product added to cart successfully')
+
+          this.$router.push({ name: 'cart' })
+        })
+        .catch((error) => {
+          console.error('Error adding product to cart:', error.message)
+        })
     }
   }
 }

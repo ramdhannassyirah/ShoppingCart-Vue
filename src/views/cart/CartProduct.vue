@@ -1,97 +1,136 @@
 <template>
-  <div id="total-price">
-    <h1 class="a">Total Price :</h1>
-    <h1 class="b">$ 99999</h1>
-  </div>
-  <div class="product-container" v-for="product in products" :key="product.id">
-    <div>
-      <img class="product-image" :src="product.imageUrl" alt="" />
+  <div>
+    <div id="page-wrap">
+      <ItemCart
+        v-for="item in cartItems"
+        :key="item.id"
+        :item="item"
+        v-on:remove-item="removeFromCart($event)"
+      />
+      <h3 id="total-price">Total: Rp{{ totalPrice }}</h3>
+      <button class="button-56">Checkout</button>
     </div>
-
-    <div class="card-price"><span>$</span> {{ product.price }}</div>
-    <router-link class="remove-button" to="">
-      <button @click="removeProduct(product.id)">Remove</button>
-    </router-link>
   </div>
 </template>
 
 <script>
-import product from '../../data-seed.js'
+import axios from 'axios'
+// import { cartItems } from '../../data-seed'
+import ItemCart from '../../components/ItemCart.vue'
+
 export default {
+  components: {
+    ItemCart
+  },
   data() {
     return {
-      products: product
+      cartItems: []
     }
   },
   methods: {
-    removeProduct(id) {
-      this.products = this.products.filter((product) => product.id !== id)
+    async removeFromCart(product) {
+      await axios.delete(
+        `https://shoppingcart-vue-server.up.railway.app/api/orders/delete/user/1/product/${product}`
+      )
+      let cart = this.cartItems
+        .map(function (item) {
+          return item.code
+        })
+        .indexOf(product)
+      this.cartItems.splice(cart, 1)
     }
+  },
+  computed: {
+    totalPrice() {
+      return this.cartItems.reduce((sum, item) => sum + Number(item.price), 0)
+    }
+  },
+  async created() {
+    const result = await axios.get(
+      'https://shoppingcart-vue-server.up.railway.app/api/orders/user/1'
+    )
+    let data = Object.assign(
+      {},
+      ...result.data.map((result) => ({
+        user_id: result.user_id,
+        cart_items: result.products
+      }))
+    )
+    this.cartItems = data.cart_items
   }
 }
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
-
 h1 {
-  font-family: 'Madimi One', sans-serif;
-}
-
-h1.a {
-  font-size: 20px;
+  border-bottom: 1px solid #41b883;
   margin: 0;
   margin-top: 16px;
-  padding: 10px;
+  padding: 16px;
 }
 
-h1.b {
-  font-size: 24px;
-  margin: 0;
-  margin-top: 16px;
-  padding: 10px;
+#page-wrap {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
 }
+
 #total-price {
   padding: 16px;
   text-align: right;
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #41b883;
 }
-
-.product-container {
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  padding: 10px 0;
+#checkout-button {
   width: 100%;
-  align-items: center;
-  justify-content: space-around;
 }
-.product-image {
-  --bg-color: #fff;
-  --main-color: #323232;
-  --main-focus: #2d8cf0;
-  height: 100px;
-  max-width: 100px;
-  border-radius: 10px;
-  background: var(--bg-color);
-  border: 2px solid var(--main-color);
-  box-shadow: 4px 4px var(--main-color);
+.button-56 {
+  align-items: center;
+  background-color: #fee6e3;
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-family: 'Madimi One', Inter, sans-serif;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
-button {
-  --font-color: #323232;
-  --font-color-sub: #666;
-  --bg-color: #fff;
-  --main-color: #323232;
-  --main-focus: #2d8cf0;
-  height: 35px;
-  background: var(--bg-color);
-  border: 2px solid var(--main-color);
-  border-radius: 5px;
-  padding: 0 15px;
-  cursor: pointer;
-  transition: all 0.5s;
+.button-56:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: '';
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform 0.2s ease-out;
+  z-index: -1;
+}
+
+.button-56:hover:after {
+  transform: translate(0, 0);
+}
+
+.button-56:active {
+  background-color: #ffdeda;
+  outline: 0;
+}
+
+.button-56:hover {
+  outline: 0;
 }
 </style>
