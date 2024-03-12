@@ -12,7 +12,7 @@ const router = createRouter({
       component: productCom
     },
     {
-      path: '/api/products/:id',
+      path: '/detail/:id',
       name: 'detail',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
