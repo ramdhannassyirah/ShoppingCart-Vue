@@ -32,21 +32,6 @@ export default {
     this.product = result.data
   },
   methods: {
-    async fetchProducts() {
-      this.loading = true
-      try {
-        const response = await axios.get(
-          `'https://shoppingcart-vue-server.up.railway.app/api/products/${this.product.code}'`
-        )
-        this.products = response.data
-        console.log(this.products)
-      } catch (error) {
-        console.error(error)
-        this.error = true
-      } finally {
-        this.loading = false
-      }
-    },
     addToCart() {
       const requestData = {
         product: this.product.code

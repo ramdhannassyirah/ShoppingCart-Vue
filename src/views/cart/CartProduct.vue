@@ -15,7 +15,7 @@
 
 <script>
 import axios from 'axios'
-// import { cartItems } from '../../data-seed'
+
 import ItemCart from '../../components/ItemCart.vue'
 
 export default {
@@ -38,21 +38,6 @@ export default {
         })
         .indexOf(product)
       this.cartItems.splice(cart, 1)
-    },
-    async fetchProducts() {
-      this.loading = true
-      try {
-        const response = await axios.get(
-          'https://shoppingcart-vue-server.up.railway.app/api/orders/user/1'
-        )
-        this.products = response.data
-        console.log(this.products)
-      } catch (error) {
-        console.error(error)
-        this.error = true
-      } finally {
-        this.loading = false
-      }
     }
   },
   computed: {
