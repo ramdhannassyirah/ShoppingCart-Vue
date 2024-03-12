@@ -24,7 +24,7 @@ export default {
       product: {}
     }
   },
-  async mounted() {
+  async created() {
     const code = this.$route.params.id
     const result = await axios.get(
       `https://shoppingcart-vue-server.up.railway.app/api/products/${code}`
