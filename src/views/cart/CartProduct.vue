@@ -27,23 +27,8 @@ export default {
       cartItems: []
     }
   },
-  mounted() {
-    this.getOrders()
-  },
+
   methods: {
-    async getOrders() {
-      const result = await axios.get(
-        'https://shoppingcart-vue-server.up.railway.app/api/orders/user/1'
-      )
-      let data = Object.assign(
-        {},
-        ...result.data.map((result) => ({
-          user_id: result.user_id,
-          cart_items: result.products
-        }))
-      )
-      this.cartItems = data.cart_items
-    },
     async removeFromCart(product) {
       await axios.delete(
         `https://shoppingcart-vue-server.up.railway.app/api/orders/delete/user/1/product/${product}`
@@ -60,20 +45,20 @@ export default {
     totalPrice() {
       return this.cartItems.reduce((sum, item) => sum + Number(item.price), 0)
     }
+  },
+  async created() {
+    const result = await axios.get(
+      'https://shoppingcart-vue-server.up.railway.app/api/orders/user/1'
+    )
+    let data = Object.assign(
+      {},
+      ...result.data.map((result) => ({
+        user_id: result.user_id,
+        cart_items: result.products
+      }))
+    )
+    this.cartItems = data.cart_items
   }
-  // async created() {
-  //   const result = await axios.get(
-  //     'https://shoppingcart-vue-server.up.railway.app/api/orders/user/1'
-  //   )
-  //   let data = Object.assign(
-  //     {},
-  //     ...result.data.map((result) => ({
-  //       user_id: result.user_id,
-  //       cart_items: result.products
-  //     }))
-  //   )
-  //   this.cartItems = data.cart_items
-  // }
 }
 </script>
 
