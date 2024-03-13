@@ -24,12 +24,17 @@ export default {
       product: {}
     }
   },
+
   async created() {
-    const code = this.$route.params.id
-    const result = await axios.get(
-      `https://shoppingcart-vue-server.up.railway.app/api/products/${code}`
-    )
-    this.product = result.data
+    try {
+      const code = this.$route.params.id
+      const result = await axios.get(
+        `https://shoppingcart-vue-server.up.railway.app/api/products/${code}`
+      )
+      this.product = result.data
+    } catch (error) {
+      console.error('Error fetching product details:', error.message)
+    }
   },
   methods: {
     addToCart() {
