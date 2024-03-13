@@ -74,19 +74,7 @@ export default {
   justify-content: flex-start;
   padding: 20px;
   gap: 10px;
-  font-family:
-    'Madimi One',
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Open Sans',
-    'Helvetica Neue',
-    sans-serif;
+  font-family: 'Madimi One';
 }
 
 .card:last-child {
