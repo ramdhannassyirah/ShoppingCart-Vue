@@ -28,10 +28,10 @@ export default {
     }
   },
   mounted() {
-    this.created()
+    this.getOrders()
   },
   methods: {
-    async created() {
+    async getOrders() {
       const result = await axios.get(
         'https://shoppingcart-vue-server.up.railway.app/api/orders/user/1'
       )
